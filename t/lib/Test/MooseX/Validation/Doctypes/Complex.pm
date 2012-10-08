@@ -1,4 +1,4 @@
-package Test::Validatable::Complex;
+package Test::MooseX::Validation::Doctypes::Complex;
 
 use strict;
 use warnings;
@@ -13,7 +13,7 @@ use Locale::Language   ();
 use Locale::Currency   ();
 use Number::Phone::US  ();
 
-use Validatable;
+use MooseX::Validation::Doctypes;
 
 subtype 'CurrencyCode' => as 'Str' => where { Locale::Currency::code2currency( $_ )    || undef };
 subtype 'LocaleCode'   => as 'Str' => where { Locale::Language::code2language( $_ )    || undef };

@@ -1,4 +1,4 @@
-package Validatable;
+package MooseX::Validation::Doctypes;
 
 use strict;
 use warnings;
@@ -34,13 +34,13 @@ sub doctype {
     my $caller = caller;
     my $meta = find_meta($caller);
 
-    unless($meta->get_method('_get_doctypes')) {
-        $meta->add_attribute('_doctypes' => (
-            reader => '_get_doctypes'
+    unless($meta->get_method('_get_moosex_validation_doctypes')) {
+        $meta->add_attribute('_moosex_validation_doctypes' => (
+            reader => '_get_moosex_validation_doctypes'
         ));
     }
 
-    my $dt = $meta->get_attribute('_doctypes');
+    my $dt = $meta->get_attribute('_moosex_validation_doctypes');
     my $caller_obj = Class::MOP::Class->initialize($caller);
     my $doctypes = $dt->get_value($caller_obj) || {};
     $doctypes->{$name} = $p{as};
@@ -49,7 +49,7 @@ sub doctype {
 
 sub list_doctype {
     my ($self, $type) = @_;
-    my $doctypes = $self->meta->get_attribute('_doctypes')->get_value(Class::MOP::Class->initialize(ref $self));
+    my $doctypes = $self->meta->get_attribute('_moosex_validation_doctypes')->get_value(Class::MOP::Class->initialize(ref $self));
     if($type) {
         return $doctypes->{$type} || {};
     }
@@ -128,12 +128,12 @@ sub expand_hash {
             s/\\(.)/$1/g if $sep; # remove escaping
             $$box_ref = {} unless defined $$box_ref;
             unless(ref $$box_ref eq 'HASH') {
-                die "CGI param clash for $name=$_";
+                die "Clash for $name=$_";
             }
             $box_ref = \($$box_ref->{$_});
         }
         if(defined $$box_ref) {
-            die "CGI param clash for $name value $flat->{$name}"
+            die "Clash for $name value $flat->{$name}"
         }
         $$box_ref = $flat->{$name};
     }

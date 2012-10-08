@@ -1,7 +1,7 @@
-package Test::Validatable::Simple;
+package Test::MooseX::Validation::Doctypes::Simple;
 
 use Moose;
-use Validatable;
+use MooseX::Validation::Doctypes;
 
 doctype 'Person' => as {
     id       => 'Str', 

@@ -4,12 +4,9 @@ use strict;
 use warnings;
 
 use Test::More;
-use Test::Validatable::Complex;
+use Test::MooseX::Validation::Doctypes::Complex;
 
-use Data::Dump;
-use Data::Printer;
-
-my $complex = Test::Validatable::Complex->new;
+my $complex = Test::MooseX::Validation::Doctypes::Complex->new;
 
 is_deeply($complex->list_doctype('Location'), {
     id       => 'Str',

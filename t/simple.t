@@ -4,9 +4,9 @@ use strict;
 use warnings;
 
 use Test::More;
-use Test::Validatable::Simple;
+use Test::MooseX::Validation::Doctypes::Simple;
 
-my $simple = Test::Validatable::Simple->new;
+my $simple = Test::MooseX::Validation::Doctypes::Simple->new;
 
 is_deeply($simple->list_doctype('Person'), {
     id    => "Str",
